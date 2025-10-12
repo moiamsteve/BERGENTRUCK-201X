@@ -16,8 +16,11 @@ enum Beam {NONE, WHITE, GREEN, YELLOW, RED}
 @export var disable_collision_on_hit : bool = false
 @export var particle_effect : int = 1
 @export var beam_on_spawn: Beam = Beam.NONE
+@export var random_scale: bool = true
 
 func _ready() -> void:
+	if not random_scale:
+		return
 	var rand_scale = randf_range(0.8,1.2)
 	$EntityContainer/Sprite3D.pixel_size = pixel_size*rand_scale
 	$EntityContainer/Sprite3D.flip_h = [true,false].pick_random()

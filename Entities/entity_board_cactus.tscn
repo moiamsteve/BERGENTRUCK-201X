@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bgp4wbehltd08"]
 
 [ext_resource type="PackedScene" uid="uid://bos6rfssdin4y" path="res://Entities/_entity.tscn" id="1_8rena"]
-[ext_resource type="Texture2D" uid="uid://cs2yyeaqclo8f" path="res://Entities/Visuals/cactus.png" id="2_t0gk5"]
+[ext_resource type="Texture2D" uid="uid://bf4rbtpno1prp" path="res://Entities/Visuals/board_cactus.png" id="2_t0gk5"]
 
 [node name="Entity" node_paths=PackedStringArray("collision_shape") instance=ExtResource("1_8rena")]
 solid = false
@@ -9,10 +9,11 @@ stompable = true
 damage = 2.0
 car_jump_mult = 2.0
 collision_shape = NodePath("EntityContainer/CollisionShape3D")
-pixel_size = 0.1
+pixel_size = 0.4
 beam_on_spawn = 4
+random_scale = false
 
 [node name="Sprite3D" parent="EntityContainer" index="1"]
-offset = Vector2(0, 24)
-pixel_size = 0.1
+offset = Vector2(0, 8)
+pixel_size = 0.4
 texture = ExtResource("2_t0gk5")

@@ -1,6 +1,6 @@
 extends Control
 
-signal menu_option_clicked(option: RichTextLabel)
+signal menu_option_clicked(option: Control)
 
 @export var offset_on_cursor :=  Vector2(3,0)
 @onready var start_pos = global_position

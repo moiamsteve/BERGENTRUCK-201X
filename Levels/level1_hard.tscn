@@ -1,21 +1,19 @@
-[gd_scene load_steps=34 format=4 uid="uid://fshgeql7ofkj"]
+[gd_scene load_steps=35 format=4 uid="uid://fshgeql7ofkj"]
 
 [ext_resource type="PackedScene" uid="uid://bmfdo622wwei3" path="res://Levels/_level.tscn" id="1_lqeym"]
 [ext_resource type="AudioStream" uid="uid://cvcpmwcicdcp" path="res://_Global/Music/Sandrise.ogg" id="2_b5jn4"]
-[ext_resource type="PackedScene" uid="uid://ctqvlpvnb0dxs" path="res://Entities/bkg_tree_palm.tscn" id="3_2m3sh"]
+[ext_resource type="PackedScene" uid="uid://ctqvlpvnb0dxs" path="res://Entities/bkg_board_tree.tscn" id="3_2m3sh"]
 [ext_resource type="Texture2D" uid="uid://ckd3hw1nfopw6" path="res://Levels/Visuals/ground_sand.png" id="3_3k8q0"]
-[ext_resource type="Texture2D" uid="uid://ckxnh2qwh3g02" path="res://Levels/Visuals/backgrounds/Background_207.png" id="3_dbqd3"]
-[ext_resource type="Texture2D" uid="uid://djxywvud8iy6a" path="res://Levels/Visuals/backgrounds/Background_218.png" id="4_2m3sh"]
-[ext_resource type="Texture2D" uid="uid://dcpgr65exsmmg" path="res://Levels/Visuals/backgrounds/Background_217.png" id="5_luvwr"]
 [ext_resource type="Shader" uid="uid://bt2opdfmb6b3a" path="res://Levels/Visuals/3d_mosaic_test.gdshader" id="6_f8dhg"]
 [ext_resource type="Shader" uid="uid://do6ig3soufyor" path="res://Levels/Visuals/2d_mosaic.gdshader" id="8_ylm6e"]
-[ext_resource type="PackedScene" uid="uid://db25rqqt0w0td" path="res://_Global/Particles/3DSmoke.tscn" id="9_2m3sh"]
+[ext_resource type="Texture2D" uid="uid://k8p486amcdi3" path="res://Levels/Visuals/backgrounds/Cloud1.png" id="9_8e548"]
 [ext_resource type="PackedScene" uid="uid://c3a4oi8k5x1mp" path="res://_Global/Particles/3DSmokeReal.tscn" id="10_8e548"]
+[ext_resource type="Texture2D" uid="uid://dqpr14hn23n1i" path="res://Levels/Visuals/backgrounds/Cloud2.png" id="10_luvwr"]
 [ext_resource type="Texture2D" uid="uid://u01xdshxcsxb" path="res://_Global/Particles/Visuals/realsmoke.png" id="11_f8dhg"]
 
-[sub_resource type="Environment" id="Environment_3k8q0"]
+[sub_resource type="Environment" id="Environment_f8dhg"]
 background_mode = 1
-background_color = Color(0.6472143, 0.7489612, 1, 1)
+background_color = Color(0.6771195, 0.9757711, 0.73616636, 1)
 fog_mode = 1
 fog_light_color = Color(0.8930768, 0.51573336, 0.78663945, 1)
 fog_light_energy = 0.5
@@ -116,7 +114,7 @@ stencil_flags = 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rd5ux"]
 shader = ExtResource("8_ylm6e")
-shader_parameter/cell_size = 3
+shader_parameter/cell_size = 2
 
 [sub_resource type="Gradient" id="Gradient_f8dhg"]
 offsets = PackedFloat32Array(0, 0.47348484, 0.8125, 1)
@@ -125,51 +123,75 @@ colors = PackedColorArray(1, 0.87034494, 0, 1, 1, 0, 0.7741893, 1, 0.69577837, 0
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_f8dhg"]
 gradient = SubResource("Gradient_f8dhg")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8e548"]
-transparency = 2
-alpha_scissor_threshold = 0.5
-alpha_antialiasing_mode = 0
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f8dhg"]
+transparency = 1
 shading_mode = 0
-albedo_texture = ExtResource("3_dbqd3")
-uv1_scale = Vector3(1.42, 1, 1)
+albedo_color = Color(0.93069565, 0.93069565, 0.93069565, 1)
+albedo_texture = ExtResource("10_luvwr")
+uv1_scale = Vector3(1, 0.45, 1)
 texture_filter = 0
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_f8dhg"]
-material = SubResource("StandardMaterial3D_8e548")
-size = Vector2(4000, 300)
+[sub_resource type="PlaneMesh" id="PlaneMesh_luvwr"]
+material = SubResource("StandardMaterial3D_f8dhg")
+size = Vector2(1000, 100)
 orientation = 2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lemp5"]
-transparency = 2
-alpha_scissor_threshold = 0.5
-alpha_antialiasing_mode = 0
-shading_mode = 0
-albedo_texture = ExtResource("5_luvwr")
-texture_filter = 0
-texture_repeat = false
+[sub_resource type="GDScript" id="GDScript_luvwr"]
+resource_name = "bkgscroll"
+script/source = "extends MeshInstance3D
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_3r6y7"]
-material = SubResource("StandardMaterial3D_lemp5")
-size = Vector2(700, 100)
-orientation = 2
+func _process(delta: float) -> void:
+	mesh.surface_get_material(0).uv1_offset.x -= delta/150
+"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dbqd3"]
 transparency = 2
 alpha_scissor_threshold = 0.5
 alpha_antialiasing_mode = 0
 shading_mode = 0
-albedo_texture = ExtResource("4_2m3sh")
+albedo_texture = ExtResource("9_8e548")
+uv1_scale = Vector3(1.71, 1.71, 1.71)
 texture_filter = 0
-texture_repeat = false
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2m3sh"]
 material = SubResource("StandardMaterial3D_dbqd3")
 size = Vector2(500, 80)
 orientation = 2
 
-[node name="Level1" instance=ExtResource("1_lqeym")]
+[sub_resource type="GDScript" id="GDScript_8e548"]
+resource_name = "bkgscroll"
+script/source = "extends MeshInstance3D
+
+func _process(delta: float) -> void:
+	mesh.surface_get_material(0).uv1_offset.x -= delta/40
+"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_luvwr"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+shading_mode = 0
+albedo_texture = ExtResource("9_8e548")
+uv1_scale = Vector3(1.71, 1.71, 1.71)
+uv1_offset = Vector3(0.13, 0, 0)
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8e548"]
+material = SubResource("StandardMaterial3D_luvwr")
+size = Vector2(500, 80)
+orientation = 2
+
+[sub_resource type="GDScript" id="GDScript_f8dhg"]
+resource_name = "bkgscroll"
+script/source = "extends MeshInstance3D
+
+func _process(delta: float) -> void:
+	mesh.surface_get_material(0).uv1_offset.x -= delta/30
+"
+
+[node name="Level1Hard" instance=ExtResource("1_lqeym")]
 music = ExtResource("2_b5jn4")
-item_queue_intro = Array[String](["uid://dod06qvkdjumy", "uid://dod06qvkdjumy", "uid://cp874tnj528bf", "uid://cuu8u82sv6b75", "uid://cuu8u82sv6b75", "uid://bgp4wbehltd08", "uid://bgp4wbehltd08", "uid://b560lsaps4025", "uid://cp874tnj528bf", "", "", "", "", "", ""])
+item_queue_intro = Array[String](["uid://mo26i7dv8ue2", "uid://mo26i7dv8ue2", "uid://bgp4wbehltd08", "uid://bgp4wbehltd08", "", "", "", "", "", ""])
 item_queue_mid = Array[String](["uid://bympmn5b7p10t", "uid://btetd788ltvnu", "uid://btetd788ltvnu", "uid://cuu8u82sv6b75", "uid://cuu8u82sv6b75", "uid://dod06qvkdjumy", "", "", "", "", "", ""])
 item_queue_end = Array[String](["uid://bympmn5b7p10t", "uid://bympmn5b7p10t", "uid://btetd788ltvnu", "uid://cuu8u82sv6b75", "uid://dod06qvkdjumy", "uid://ceudumccrqglg", "uid://cuu8u82sv6b75", "", "", ""])
 trees = ExtResource("3_2m3sh")
@@ -178,7 +200,10 @@ level_code = "1X (Thorns)"
 bkg_item_spawn_threshold = 80.0
 
 [node name="WorldEnvironment" parent="." index="0"]
-environment = SubResource("Environment_3k8q0")
+environment = SubResource("Environment_f8dhg")
+
+[node name="Background" parent="Player" index="0"]
+mesh = null
 
 [node name="Parallax2D" parent="Player/Visuals" index="10"]
 visible = false
@@ -223,20 +248,20 @@ disable_collision_on_hit = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, -15, 0)
 disable_collision_on_hit = false
 
-[node name="BackgroundFurthest" type="MeshInstance3D" parent="." index="8"]
-transform = Transform3D(1, 0, 0, 0, 0.999455, -0.0329982, 0, 0.0329982, 0.999455, 0, -214.954, -528.596)
-mesh = SubResource("PlaneMesh_f8dhg")
+[node name="BackgroundFar" type="MeshInstance3D" parent="." index="8"]
+transform = Transform3D(1, 0, 0, 0, 0.999455, -0.0329982, 0, 0.0329982, 0.999455, -13.9821, -31.078735, -153.701)
+mesh = SubResource("PlaneMesh_luvwr")
+script = SubResource("GDScript_luvwr")
 
-[node name="BackgroundFar" type="MeshInstance3D" parent="." index="9"]
-transform = Transform3D(1, 0, 0, 0, 0.999455, -0.0329982, 0, 0.0329982, 0.999455, -13.9821, -79.3783, -153.701)
-mesh = SubResource("PlaneMesh_3r6y7")
-
-[node name="BackgroundNear" type="MeshInstance3D" parent="." index="10"]
-transform = Transform3D(1, 0, 0, 0, 0.999455, -0.0329982, 0, 0.0329982, 0.999455, 0, -73.0492, -90.62991)
+[node name="BackgroundNear" type="MeshInstance3D" parent="." index="9"]
+transform = Transform3D(1, 0, 0, 0, 1.5541531, -0.032998215, 0, 0.051312223, 0.9994554, 0, -15.228519, -40.197063)
 mesh = SubResource("PlaneMesh_2m3sh")
+script = SubResource("GDScript_8e548")
 
-[node name="GPUParticles3D" parent="." index="11" instance=ExtResource("9_2m3sh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.165098, -3.1586487, -13.592684)
+[node name="BackgroundNear2" type="MeshInstance3D" parent="." index="10"]
+transform = Transform3D(1, 0, 0, 0, 1.5541531, -0.032998215, 0, 0.051312223, 0.9994554, 0, -33.182796, -91.314255)
+mesh = SubResource("PlaneMesh_8e548")
+script = SubResource("GDScript_f8dhg")
 
 [editable path="Player"]
 [editable path="Player/Visuals/WidgetWheel"]

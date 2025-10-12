@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=4 uid="uid://dmxrsb6vf3fo0"]
+[gd_scene load_steps=78 format=4 uid="uid://dmxrsb6vf3fo0"]
 
 [ext_resource type="Script" uid="uid://y2icolv1tlef" path="res://Levels/Scripts/player.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bx7udjgnsoknr" path="res://Levels/Visuals/skybox.png" id="2"]
@@ -33,7 +33,6 @@
 [ext_resource type="Texture2D" uid="uid://b21padqbquojs" path="res://UI/Visuals/speed_lines.png" id="28_qjdec"]
 [ext_resource type="Texture2D" uid="uid://c0pe8emsrbklv" path="res://Levels/Visuals/car_default.png" id="29_tcnov"]
 [ext_resource type="Texture2D" uid="uid://cjrsss045q2v1" path="res://UI/Visuals/pausebutton.png" id="32_7uaga"]
-[ext_resource type="Script" uid="uid://ri47f5qti7h5" path="res://UI/Scripts/menu_option.gd" id="33_upfhq"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_34hgd"]
 size = Vector2(500, 30.805)
@@ -482,8 +481,30 @@ animations = [{
 "speed": 15.0
 }]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_upfhq"]
-blend_mode = 1
+[sub_resource type="GDScript" id="GDScript_7uaga"]
+resource_name = "Pause"
+script/source = "extends \"res://UI/Scripts/menu_option.gd\"
+
+func _on_mouse_entered() -> void:
+	super()
+	var tween_alt = create_tween()
+	tween_alt.set_parallel(true)
+	tween_alt.tween_property(self,'modulate',Color(\"ffffff\"),0.05)
+	tween_alt.tween_property(self,'scale',Vector2(1.0,1.0),0.05)
+
+
+func _on_mouse_exited() -> void:
+	super()
+	var tween_alt = create_tween()
+	tween_alt.set_parallel(true)
+	tween_alt.tween_property(self,'modulate',Color(\"ffffff26\"),0.05)
+	tween_alt.tween_property(self,'scale',Vector2(0.7,0.7),0.05)
+
+
+func _on_menu_option_clicked(option: Control) -> void:
+	Input.action_press(\"click_right\")
+	Input.action_release(\"click_right\")
+"
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("hand", "widget_gear", "widget_wheel", "visual_gear", "visual_wheel", "visual_asgore", "entity_hitbox")]
 script = ExtResource("1")
@@ -1078,17 +1099,24 @@ frame_progress = 0.179725
 position = Vector2(635, 115)
 texture = ExtResource("29_tcnov")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-modulate = Color(1, 1, 1, 0.20400001)
+[node name="Pause" type="TextureRect" parent="."]
+process_mode = 3
+modulate = Color(1, 1, 1, 0.14901961)
+light_mask = 512
+visibility_layer = 512
 z_index = 4096
-material = SubResource("CanvasItemMaterial_upfhq")
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 26.0
-offset_bottom = 26.0
+z_as_relative = false
+offset_left = -7.0
+offset_top = -7.0
+offset_right = 43.0
+offset_bottom = 43.0
+scale = Vector2(0.7, 0.7)
+pivot_offset = Vector2(25, 25)
 texture = ExtResource("32_7uaga")
-expand_mode = 1
-script = ExtResource("33_upfhq")
+expand_mode = 2
+stretch_mode = 3
+script = SubResource("GDScript_7uaga")
+offset_on_cursor = Vector2(0, 0)
 
 [connection signal="drag_started" from="Visuals/WidgetWheel/DraggableItem/MouseDragComponent" to="." method="_steering_wheel_get_y"]
 [connection signal="input_event" from="Visuals/WidgetGear/Area2D" to="Visuals/WidgetGear/DraggableItem" method="_on_input_event"]
@@ -1099,6 +1127,7 @@ script = ExtResource("33_upfhq")
 [connection signal="body_exited" from="FaceZone" to="." method="_item_exited_face"]
 [connection signal="timeout" from="FaceActionTimer" to="." method="_item_action_timeout"]
 [connection signal="timeout" from="DrunkTimer" to="." method="_on_drunk_timer_timeout"]
+[connection signal="menu_option_clicked" from="Pause" to="Pause" method="_on_menu_option_clicked"]
 
 [editable path="Visuals/WidgetWheel"]
 [editable path="Visuals/WidgetWheel/DraggableItem"]

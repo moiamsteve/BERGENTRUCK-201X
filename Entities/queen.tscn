@@ -109,7 +109,7 @@ hit_sound_impact = null
 disabled = true
 
 [node name="CollisionShape3D" parent="EntityContainer" index="1"]
-transform = Transform3D(1.89, 0, 0, 0, 0.962413, -0.271592, 0, 0.271592, 0.962413, 0.4109, 7.07107, 3.26102)
+transform = Transform3D(1.89, 0, 0, 0, 0.878834, -0.47712854, 0, 0.47712854, 0.878834, 0.4109, 7.0710697, 4.6488857)
 shape = SubResource("BoxShape3D_uf544")
 disabled = true
 

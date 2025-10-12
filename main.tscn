@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://pfn2cpkppd67"]
+[gd_scene load_steps=14 format=3 uid="uid://pfn2cpkppd67"]
 
 [ext_resource type="Script" uid="uid://c047atpq0lmk3" path="res://main.gd" id="1_7mycd"]
 [ext_resource type="Script" uid="uid://couw105c3bde4" path="res://addons/godot_state_charts/state_chart.gd" id="2_272bh"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://cf1nsco3w0mf6" path="res://addons/godot_state_charts/transition.gd" id="4_kek77"]
 [ext_resource type="Script" uid="uid://cytafq8i1y8qm" path="res://addons/godot_state_charts/atomic_state.gd" id="5_4c57u"]
 [ext_resource type="Texture2D" uid="uid://bu325xsdlvy3f" path="res://_Global/Borders/Blank.png" id="6_efxa6"]
+[ext_resource type="Shader" uid="uid://bi4mxbv10akp5" path="res://crt.gdshader" id="7_5vw27"]
 [ext_resource type="Script" uid="uid://dpa0bdsngjtpf" path="res://_Common/discord_manager.gd" id="7_272bh"]
 
 [sub_resource type="Animation" id="Animation_hbaan"]
@@ -44,6 +45,54 @@ _data = {
 &"RESET": SubResource("Animation_hbaan"),
 &"change_border": SubResource("Animation_ovrsl")
 }
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5vw27"]
+shader = ExtResource("7_5vw27")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.010000000475
+shader_parameter/scanlines_width = 0.5
+shader_parameter/grille_opacity = 0.010000000475
+shader_parameter/resolution = Vector2(480, 540)
+shader_parameter/pixelate = false
+shader_parameter/roll = true
+shader_parameter/roll_speed = 0.2
+shader_parameter/roll_size = 2.6050001237375
+shader_parameter/roll_variation = 5.0
+shader_parameter/distort_intensity = 0.0010000000475
+shader_parameter/noise_opacity = 0.050000002375
+shader_parameter/noise_speed = 10.0
+shader_parameter/static_noise_intensity = 0.030000001425
+shader_parameter/aberration = 0.015000048212499895
+shader_parameter/brightness = 1.0
+shader_parameter/discolor = false
+shader_parameter/warp_amount = 0.0750000035625
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.652
+shader_parameter/vignette_opacity = 0.230000010925
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kek77"]
+shader = ExtResource("7_5vw27")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.0
+shader_parameter/scanlines_width = 0.0
+shader_parameter/grille_opacity = 0.0
+shader_parameter/resolution = Vector2(480, 480)
+shader_parameter/pixelate = true
+shader_parameter/roll = true
+shader_parameter/roll_speed = 1.0
+shader_parameter/roll_size = 6.870000326325
+shader_parameter/roll_variation = 0.56300002348262
+shader_parameter/distort_intensity = 0.010000000475
+shader_parameter/noise_opacity = 0.246000011685
+shader_parameter/noise_speed = 100.0
+shader_parameter/static_noise_intensity = 0.046000002185
+shader_parameter/aberration = 0.015000048212499895
+shader_parameter/brightness = 1.5
+shader_parameter/discolor = false
+shader_parameter/warp_amount = 0.10000000475
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.255
+shader_parameter/vignette_opacity = 1.0
 
 [node name="Main" type="Node" node_paths=PackedStringArray("game_state", "window", "border", "over_border", "discord_manager")]
 process_mode = 3
@@ -217,6 +266,28 @@ libraries = {
 
 [node name="discord-manager" type="Node" parent="."]
 script = ExtResource("7_272bh")
+
+[node name="CRTFilterBoard" type="ColorRect" parent="."]
+visible = false
+z_index = 4096
+z_as_relative = false
+material = SubResource("ShaderMaterial_5vw27")
+offset_left = 80.0
+offset_top = 15.0
+offset_right = 400.0
+offset_bottom = 255.0
+mouse_filter = 2
+
+[node name="CRTFilterVHS" type="ColorRect" parent="."]
+visible = false
+z_index = 4096
+z_as_relative = false
+material = SubResource("ShaderMaterial_kek77")
+offset_left = 80.0
+offset_top = 15.0
+offset_right = 400.0
+offset_bottom = 255.0
+mouse_filter = 2
 
 [connection signal="state_entered" from="GameState/Root/Title" to="." method="_title_screen_enter"]
 [connection signal="state_entered" from="GameState/Root/Options" to="." method="_options_entered"]

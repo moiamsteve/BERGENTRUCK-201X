@@ -11,7 +11,7 @@ background_mode = 1
 
 [sub_resource type="GDScript" id="GDScript_6x3kj"]
 resource_name = "slipperyplayer"
-script/source = "extends \"res://Levels/player.gd\"
+script/source = "extends \"res://Levels/Scripts/player.gd\"
 
 func set_car_pos(delta: float):
 	$Camera3D.position.x = lerp($Camera3D.position.x,car_position.x+10,2.5*delta)

@@ -46,6 +46,12 @@ func _level_enter() -> void:
 	Audio.stop_music(true)
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED_HIDDEN
 	_change_program(level_path)
+	match program.name:
+		"LevelS":
+			$CRTFilterVHS.visible = true
+		"Level1Hard":
+			$CRTFilterBoard.visible = true
+
 	if discord_manager:
 		DiscordRPC.state = "Level " + str(program.level_code)
 		DiscordRPC.refresh()
@@ -67,6 +73,8 @@ func _level_process(delta) -> void:
 	
 
 func _level_exit() -> void:
+	$CRTFilterBoard.visible = false
+	$CRTFilterVHS.visible = false
 	$SubViewportContainer.material = null
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
@@ -136,6 +144,9 @@ func update_dynamic_border() -> void:
 		
 		"LevelD":
 			fade_to_border(preload("uid://b4rldvccthp4y")) # Dog Games.png
+		
+		"Level1Hard":
+			fade_to_border(preload("uid://c4fa3nuj0wmq")) # TV Time.png
 		
 		"Level3Hard":
 			fade_to_border(preload("uid://dlc5e78c7swx4")) # Cathedral.png

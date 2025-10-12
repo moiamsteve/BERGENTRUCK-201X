@@ -27,7 +27,7 @@ func _ready() -> void :
 	$GrabBox.position = Vector2(0, 0) - (($GrabBox.size * $GrabBox.scale) / 2)
 	$AudioStreamPlayer.stream = use_sound
 
-	if Global.level > 2:
+	if Global.level == 3:
 		$DraggableItem / TextureRect.modulate = Color("6f8aff")
 
 func _integrate_forces(state) -> void :
