@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://d16klqsm1uqj1"]
+[gd_scene load_steps=78 format=3 uid="uid://d16klqsm1uqj1"]
 
 [ext_resource type="PackedScene" uid="uid://bos6rfssdin4y" path="res://Entities/_entity.tscn" id="1_7dxir"]
 [ext_resource type="Script" uid="uid://cjkfxh0crkwu0" path="res://Entities/Scripts/spamton.gd" id="2_c3ebg"]
@@ -64,6 +64,18 @@ region = Rect2(180, 0, 36, 33)
 atlas = ExtResource("16_q87we")
 region = Rect2(216, 0, 36, 33)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_xs7sa"]
+atlas = ExtResource("16_q87we")
+region = Rect2(0, 0, 60, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u7nuu"]
+atlas = ExtResource("16_q87we")
+region = Rect2(300, 0, 60, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wo8ml"]
+atlas = ExtResource("16_q87we")
+region = Rect2(180, 0, 60, 80)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_xs7sa"]
 animations = [{
 "frames": [{
@@ -94,13 +106,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_o3ef7")
+"texture": SubResource("AtlasTexture_xs7sa")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6a2wm")
+"texture": SubResource("AtlasTexture_u7nuu")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_avd3n")
+"texture": SubResource("AtlasTexture_wo8ml")
 }],
 "loop": true,
 "name": &"idle",
@@ -2302,7 +2314,7 @@ pixel_size = 0.08
 texture = ExtResource("11_o3ef7")
 
 [node name="RightLeg" type="Sprite3D" parent="EntityContainer" index="15" groups=["shake"]]
-transform = Transform3D(2.2933, 0, 0, 0, 2.2933, -1.19209e-07, 0, 1.19209e-07, 2.2933, 1.92939, 7.67235, -1.54158)
+transform = Transform3D(2.2933, 0, 0, 0, 2.2933, -1.19209176e-07, 0, 1.19209176e-07, 2.2933, 1.92939, 7.67235, -1.54158)
 sorting_use_aabb_center = false
 offset = Vector2(0, -18.385)
 pixel_size = 0.14
@@ -2310,7 +2322,7 @@ texture_filter = 0
 texture = ExtResource("11_6a2wm")
 
 [node name="LeftLeg" type="Sprite3D" parent="EntityContainer" index="16" groups=["shake"]]
-transform = Transform3D(1.95601, 1.02597, -0.616954, -1.02598, 2.04558, 0.14896, 0.616956, 0.148961, 2.20372, -0.710494, 7.07933, -1.54158)
+transform = Transform3D(1.956011, 1.025973, -0.6169544, -1.0259773, 2.0455785, 0.14896017, 0.6169565, 0.1489612, 2.2037199, -0.710494, 7.07933, -1.54158)
 sorting_use_aabb_center = false
 offset = Vector2(0, -17.085)
 pixel_size = 0.14
@@ -2318,7 +2330,7 @@ texture_filter = 0
 texture = ExtResource("12_avd3n")
 
 [node name="RightArm" type="Sprite3D" parent="EntityContainer" index="17" groups=["shake"]]
-transform = Transform3D(2.15499, -0.784357, 0, 0.75008, 2.06084, -0.670495, 0.229323, 0.630062, 2.19309, 3.4308, 12.1861, -9.53674e-07)
+transform = Transform3D(2.15499, -0.78435737, 0, 0.75008005, 2.0608397, -0.6704949, 0.22932251, 0.630062, 2.19309, 3.4308, 12.1861, -9.53674e-07)
 sorting_use_aabb_center = false
 offset = Vector2(0, -18.385)
 pixel_size = 0.14
@@ -2328,7 +2340,7 @@ hframes = 7
 frame = 1
 
 [node name="LeftArm" type="Sprite3D" parent="EntityContainer" index="18" groups=["shake"]]
-transform = Transform3D(2.29055, -0.0226011, 0.109969, 0.0432166, 2.25075, -0.437582, -0.103616, 0.439129, 2.24848, -2.25452, 11.593, -2.50452)
+transform = Transform3D(2.29055, -0.022601055, 0.10996898, 0.043216567, 2.25075, -0.43758217, -0.10361606, 0.43912926, 2.24848, -2.25452, 11.593, -2.50452)
 sorting_use_aabb_center = false
 offset = Vector2(0, -17.085)
 pixel_size = 0.14
@@ -2341,7 +2353,7 @@ frame = 1
 transform = Transform3D(1, -2.79397e-09, 1.35042e-08, -3.72529e-09, 1, 8.9407e-08, -3.25963e-09, 0, 1, 0, -2.85, 0)
 
 [node name="RightWing" type="Sprite3D" parent="EntityContainer" index="19" groups=["shake"]]
-transform = Transform3D(2.22539, -0.172525, 0.526391, 0.0111794, 2.19278, 0.671421, -0.55383, -0.648973, 2.12869, 0.96, 13.445, -2)
+transform = Transform3D(2.22539, -0.1725247, 0.5263914, 0.011179437, 2.19278, 0.6714208, -0.55383, -0.64897305, 2.1286898, 0.96, 13.445, -2)
 sorting_use_aabb_center = false
 offset = Vector2(24.54, -0.765)
 pixel_size = 0.14
@@ -2349,7 +2361,7 @@ texture_filter = 0
 texture = ExtResource("14_8xtoj")
 
 [node name="LeftWing" type="Sprite3D" parent="EntityContainer" index="20" groups=["shake"]]
-transform = Transform3D(1.7662, 0.27092, -1.43748, -0.103134, 2.27108, 0.301307, 1.45915, -0.167408, 1.76127, -0.608046, 9.6864, -4.62462)
+transform = Transform3D(1.766201, 0.27091983, -1.4374802, -0.103134125, 2.27108, 0.30130705, 1.4591484, -0.16740796, 1.7612699, -0.608046, 9.6864, -4.62462)
 sorting_use_aabb_center = false
 offset = Vector2(-10.28, 15.92)
 pixel_size = 0.14
@@ -2357,14 +2369,13 @@ texture_filter = 0
 texture = ExtResource("15_2wa6i")
 
 [node name="Head" type="AnimatedSprite3D" parent="EntityContainer" index="21" groups=["shake"]]
-transform = Transform3D(1.54559, 0, 0, 0, 1.54559, 1.78814e-07, 0, -1.78814e-07, 1.54559, 0.356922, 12.6531, 1.26747)
+transform = Transform3D(1.54559, 0, 0, 0, 1.54559, 1.7881395e-07, 0, -1.7881395e-07, 1.54559, 0.356922, 12.6531, 1.26747)
 sorting_use_aabb_center = false
 offset = Vector2(4.355, 10.21)
-pixel_size = 0.14
+pixel_size = 0.07
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_xs7sa")
 animation = &"idle"
-frame = 2
 
 [node name="Sprite3D" parent="EntityContainer" index="22" groups=["shake"]]
 transform = Transform3D(2.2933, 0, 0, 0, 2.2933, -5.96047e-07, 0, 5.96047e-07, 2.2933, -1.51865, 11.2558, -1.34059)

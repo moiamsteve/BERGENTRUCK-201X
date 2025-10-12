@@ -2,17 +2,14 @@
 
 [ext_resource type="PackedScene" uid="uid://bmfdo622wwei3" path="res://Levels/_level.tscn" id="1_b2mgy"]
 [ext_resource type="Script" uid="uid://q1a3hurk2fbf" path="res://Levels/Scripts/level_s.gd" id="2_e7qbr"]
-[ext_resource type="PackedScene" uid="uid://ccpu6yt87u87w" path="res://Entities/bkg_building.tscn" id="2_upnl3"]
 [ext_resource type="Texture2D" uid="uid://bubaumweqa0jw" path="res://Levels/Visuals/skybox_2.png" id="3_e7qbr"]
-[ext_resource type="Texture2D" uid="uid://dhdsrm425eepr" path="res://Levels/Visuals/cardark.png" id="4_dfrsb"]
-[ext_resource type="Material" uid="uid://ddsqja20t5b1y" path="res://Levels/Visuals/Cyber Ground Texture.tres" id="5_0dyyc"]
 [ext_resource type="Material" uid="uid://ujv22l0iy43o" path="res://Levels/Visuals/Ground Texture.tres" id="6_0rcmt"]
 [ext_resource type="Texture2D" uid="uid://dpnjp872fjwup" path="res://Entities/Visuals/Spamton/punchers.png" id="6_5k8mk"]
+[ext_resource type="Texture2D" uid="uid://jfn75lgr5swo" path="res://Levels/Visuals/ground_spamton.png" id="7_5k8mk"]
 [ext_resource type="PackedScene" uid="uid://d0tgrulyxroeg" path="res://Entities/entity_dess.tscn" id="7_h0uai"]
 [ext_resource type="Script" uid="uid://decrvqtcuykfp" path="res://Entities/Scripts/entity_SPAMMY.gd" id="8_4n5bj"]
 [ext_resource type="Texture2D" uid="uid://dgd433sk5xj0q" path="res://Entities/Visuals/building.png" id="9_egi8r"]
 [ext_resource type="Texture2D" uid="uid://belx11jwbc13l" path="res://Entities/Visuals/Spamton/wire.png" id="10_afm8j"]
-[ext_resource type="Texture2D" uid="uid://dyjb7i1b8evdq" path="res://Entities/Visuals/Queen/cityscape.png" id="10_upnl3"]
 [ext_resource type="Texture2D" uid="uid://c5gj5eswk1irl" path="res://Entities/Visuals/Spamton/rightleg.png" id="11_5k8mk"]
 [ext_resource type="Texture2D" uid="uid://cchfis4ir1u58" path="res://Entities/Visuals/Spamton/leftleg.png" id="12_76ryg"]
 [ext_resource type="Texture2D" uid="uid://m8vot50jdxtp" path="res://Entities/Visuals/Spamton/arms.png" id="13_w1ply"]
@@ -20,10 +17,16 @@
 [ext_resource type="Texture2D" uid="uid://vddn8f7lmhwx" path="res://Entities/Visuals/Spamton/leftwing.png" id="15_oyhe0"]
 [ext_resource type="Texture2D" uid="uid://dh2sguuaml7c4" path="res://Entities/Visuals/Spamton/head.png" id="16_ty0p8"]
 [ext_resource type="Texture2D" uid="uid://bw4loghftc8vv" path="res://Entities/Visuals/Spamton/body.png" id="17_anv81"]
+[ext_resource type="Texture2D" uid="uid://iwrnfl48xkne" path="res://Entities/Visuals/Queen/cityscape-spamton.png" id="20_5k8mk"]
 
 [sub_resource type="Environment" id="Environment_06yxo"]
 background_mode = 1
 background_color = Color(0, 0.0248728, 0.0920472, 1)
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0, 0, 0, 1)
+fog_density = 0.673
+fog_depth_curve = 0.5358867
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2385j"]
 size = Vector2(500, 100)
@@ -39,6 +42,14 @@ uv1_offset = Vector3(0.635, 0, 0)
 uv1_triplanar_sharpness = 0.353554
 texture_filter = 0
 texture_repeat = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_76ryg"]
+resource_name = "Ground"
+cull_mode = 2
+shading_mode = 0
+albedo_color = Color(0.946242, 0.970149, 0.976572, 1)
+albedo_texture = ExtResource("7_5k8mk")
+texture_filter = 0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_q103l"]
 _surfaces = [{
@@ -299,21 +310,25 @@ animations = [{
 "speed": 2.0
 }]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oyqdn"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_76ryg"]
+load_path = "res://.godot/imported/cityscape.png-a5a456c993bc0be4290ff486f53ddc51.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w1ply"]
+transparency = 1
 shading_mode = 0
 specular_mode = 2
-albedo_color = Color(0.461866, 0.540582, 0.632269, 1)
-albedo_texture = ExtResource("10_upnl3")
+albedo_color = Color(0.74138474, 0.7413847, 0.74138457, 1)
+albedo_texture = ExtResource("20_5k8mk")
 heightmap_scale = 16.0
-heightmap_texture = ExtResource("10_upnl3")
-uv1_scale = Vector3(0, 0.018, -0.006)
-uv1_offset = Vector3(0, -1.447, 0.347)
+heightmap_texture = SubResource("CompressedTexture2D_76ryg")
+uv1_scale = Vector3(0, 0.027, -0.014)
+uv1_offset = Vector3(0, -0.499, 0.347)
 uv1_triplanar = true
-uv1_triplanar_sharpness = 5.38452
+uv1_triplanar_sharpness = 2.8855042
 texture_filter = 5
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_e7qbr"]
-material = SubResource("StandardMaterial3D_oyqdn")
+[sub_resource type="CylinderMesh" id="CylinderMesh_513ip"]
+material = SubResource("StandardMaterial3D_w1ply")
 flip_faces = true
 top_radius = 101.765
 bottom_radius = 70.395
@@ -327,7 +342,7 @@ music = null
 item_queue_intro = Array[String]([""])
 item_queue_mid = Array[String](["uid://cqhgj0b8d0w3x", "uid://butoedeih22pw"])
 item_queue_end = Array[String](["uid://cqhgj0b8d0w3x", "uid://cqhgj0b8d0w3x", "uid://butoedeih22pw"])
-trees = ExtResource("2_upnl3")
+trees = null
 level_val = 7
 level_code = "QX (Buyout City)"
 bkg_item_spawn_threshold = 30.0
@@ -347,7 +362,6 @@ modulate = Color(0.34902, 0.486275, 0.670588, 1)
 
 [node name="Visuals" parent="Player" index="2"]
 modulate = Color(0.779291, 0.779291, 0.779291, 1)
-texture = ExtResource("4_dfrsb")
 
 [node name="Punchers" type="Sprite2D" parent="Player/Visuals" index="8"]
 show_behind_parent = true
@@ -356,7 +370,7 @@ scale = Vector2(0.510714, 0.510714)
 texture = ExtResource("6_5k8mk")
 
 [node name="Ground" parent="Player" index="14"]
-material_override = ExtResource("5_0dyyc")
+material_override = SubResource("StandardMaterial3D_76ryg")
 mesh = SubResource("ArrayMesh_p320n")
 surface_material_override/0 = null
 
@@ -554,7 +568,7 @@ texture = ExtResource("9_egi8r")
 [node name="Cityscape" type="MeshInstance3D" parent="." index="8"]
 transform = Transform3D(1.095, 0, 0, 0, 1.02603, 1.52782, 0, -0.541152, 2.89679, 0, 16.9598, 0)
 extra_cull_margin = 100.0
-mesh = SubResource("CylinderMesh_e7qbr")
+mesh = SubResource("CylinderMesh_513ip")
 
 [node name="GunBushSpawnTimer" type="Timer" parent="." index="9"]
 wait_time = 5.0
