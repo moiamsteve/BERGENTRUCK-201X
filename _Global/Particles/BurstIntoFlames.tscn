@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3jq7be2yduie"]
+
+[ext_resource type="PackedScene" uid="uid://ci1pueoaiu5vg" path="res://_Global/Particles/Smokepuff.tscn" id="1_yy0r7"]
+
+[sub_resource type="Curve" id="Curve_yy0r7"]
+_data = [Vector2(0, 0), 0.0, 7.1629233, 0, 0, Vector2(0.35947716, 0.37078655), 0.45239484, 0.45239484, 0, 0, Vector2(0.754499, 0.249097), -0.692983, -0.692983, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_yy0r7"]
+offsets = PackedFloat32Array(0, 0.2913386, 0.51968503, 1)
+colors = PackedColorArray(1, 0.54509807, 0.54509807, 0.5176471, 0.43300554, 0.3297163, 0.3264821, 1, 0, 0, 0, 0.7111111, 0, 0, 0, 0)
+
+[node name="Smokepuff" instance=ExtResource("1_yy0r7")]
+z_index = 4096
+scale = Vector2(50, 50)
+emitting = true
+amount = 100
+lifetime = 7.0
+emission_sphere_radius = 0.52
+direction = Vector2(0, -50)
+spread = 29.44
+gravity = Vector2(0, 0)
+initial_velocity_max = 2.0
+angular_velocity_min = -66.21
+angular_velocity_max = 66.21
+linear_accel_max = 0.1
+radial_accel_max = 0.1
+damping_max = 0.5
+scale_amount_min = 0.05
+scale_amount_max = 0.25
+scale_amount_curve = SubResource("Curve_yy0r7")
+color = Color(1, 1, 1, 0.16470589)
+color_ramp = SubResource("Gradient_yy0r7")

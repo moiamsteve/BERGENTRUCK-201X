@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=4 uid="uid://fshgeql7ofkj"]
+[gd_scene load_steps=40 format=4 uid="uid://fshgeql7ofkj"]
 
 [ext_resource type="PackedScene" uid="uid://bmfdo622wwei3" path="res://Levels/_level.tscn" id="1_lqeym"]
 [ext_resource type="AudioStream" uid="uid://cvcpmwcicdcp" path="res://_Global/Music/Sandrise.ogg" id="2_b5jn4"]
@@ -14,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://c3a4oi8k5x1mp" path="res://_Global/Particles/3DSmokeReal.tscn" id="10_8e548"]
 [ext_resource type="Texture2D" uid="uid://dqpr14hn23n1i" path="res://Levels/Visuals/backgrounds/Cloud2.png" id="10_luvwr"]
 [ext_resource type="Texture2D" uid="uid://u01xdshxcsxb" path="res://_Global/Particles/Visuals/realsmoke.png" id="11_f8dhg"]
-[ext_resource type="PackedScene" uid="uid://dsx4f412qaann" path="res://Items/item_board_sword.tscn" id="15_lemp5"]
 
 [sub_resource type="Environment" id="Environment_f8dhg"]
 background_mode = 1
@@ -284,12 +283,7 @@ transform = Transform3D(1, 0, 0, 0, 1.5541531, -0.032998215, 0, 0.051312223, 0.9
 mesh = SubResource("PlaneMesh_2m3sh")
 script = SubResource("GDScript_8e548")
 
-[node name="Item" parent="." index="10" node_paths=PackedStringArray("player") instance=ExtResource("15_lemp5")]
-position = Vector2(185, 38)
-collision_layer = 5
-player = NodePath("../Player")
-
-[node name="BackgroundNear2" type="MeshInstance3D" parent="." index="11"]
+[node name="BackgroundNear2" type="MeshInstance3D" parent="." index="10"]
 transform = Transform3D(1, 0, 0, 0, 1.5541531, -0.032998215, 0, 0.051312223, 0.9994554, 0, -33.182796, -91.314255)
 mesh = SubResource("PlaneMesh_8e548")
 script = SubResource("GDScript_f8dhg")

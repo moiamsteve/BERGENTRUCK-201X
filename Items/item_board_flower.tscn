@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://bhqgdbtnrovt7"]
+[gd_scene load_steps=20 format=3 uid="uid://bhqgdbtnrovt7"]
 
 [ext_resource type="PackedScene" uid="uid://b3q7waomg7hnc" path="res://Items/_item.tscn" id="1_cye1v"]
 [ext_resource type="Texture2D" uid="uid://dyr6s7eqrecta" path="res://Items/Visuals/flower.png" id="3_1tlh0"]
 [ext_resource type="Texture2D" uid="uid://b8suunvnocokw" path="res://Items/Visuals/board_flower.png" id="4_h6dvv"]
 [ext_resource type="Texture2D" uid="uid://dqsopy4lb7gof" path="res://Levels/Visuals/floor texture.png" id="4_koent"]
+[ext_resource type="AudioStream" uid="uid://r3g542yhni86" path="res://_Global/SFX/snd_board_mantle_move.wav" id="5_h6dvv"]
 
 [sub_resource type="GDScript" id="GDScript_cye1v"]
 resource_name = "boardflower"
@@ -11,8 +12,28 @@ script/source = "extends \"res://Items/Scripts/item_flower.gd\"
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	queue_free() 
+	flames()
 	pass # Replace with function body.
+
+func flames():
+	$CollisionShape2D.disabled = true
+	$DraggableItem/CollisionShape2D.disabled = true
+	$GrabBox.mouse_filter = 2
+	var anim = preload(\"uid://ba5njjtrobbbx\").instantiate()
+	get_parent().add_child(anim)
+	anim.get_node(\"AnimatedSprite2D\").global_scale = $DraggableItem/AnimatedSprite2D.global_scale
+	anim.global_position = global_position
+	anim.get_node(\"AnimatedSprite2D\").global_rotation = $DraggableItem/AnimatedSprite2D.global_rotation
+	anim.get_node(\"EvilItem\").player = player
+	var part = preload(\"uid://b3jq7be2yduie\").instantiate()
+	var part2 = preload(\"uid://c0q0mxgntgw3s\").instantiate()
+	get_parent().add_child(part)
+	get_parent().add_child(part2)
+	part.global_position = global_position
+	part.emitting = true
+	part2.global_position = global_position
+	part2.emitting = true
+	queue_free()
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1tlh0"]
@@ -73,7 +94,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"burn",
-"speed": 14.0
+"speed": 9.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -94,46 +115,6 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gfcs1"]
 radius = 37.0135
-
-[sub_resource type="Animation" id="Animation_h6dvv"]
-resource_name = "burn"
-length = 6.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("DraggableItem/AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 5.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [&"idle", &"burn"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("DraggableItem/Overlay:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 2.5, 2.5333333, 2.7, 3, 3.0333335, 3.2000003, 3.5, 3.5333333, 3.7000003, 3.8000002, 3.8333335, 4.0000005, 4.066667, 4.1000004, 4.266667, 4.3333335, 4.366667, 4.5333333, 4.6, 4.6333337, 4.8, 4.8333335, 4.866667, 5.0333333, 5.066667, 5.1000004, 5.266667, 5.3, 5.3333335, 5.5),
-"transitions": PackedFloat32Array(0.5, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("DraggableItem/Overlay:animation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"flash"]
-}
 
 [sub_resource type="Animation" id="Animation_1tlh0"]
 length = 0.001
@@ -173,6 +154,132 @@ tracks/2/keys = {
 "update": 1,
 "values": [&"flash"]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DraggableItem/AnimatedSprite2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 3)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("DraggableItem/AnimatedSprite2D:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("DraggableItem/AnimatedSprite2D:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/6/type = "audio"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AudioStreamPlayer2")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"clips": [],
+"times": PackedFloat32Array()
+}
+tracks/6/use_blend = true
+
+[sub_resource type="Animation" id="Animation_h6dvv"]
+resource_name = "burn"
+length = 5.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DraggableItem/AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DraggableItem/Overlay:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 2.5, 2.5333333, 2.7, 3, 3.0333335, 3.2000003, 3.5, 3.5333333, 3.7000003, 3.8000002, 3.8333335, 4.0000005, 4.066667, 4.1000004, 4.266667, 4.3333335, 4.366667, 4.5333333, 4.6, 4.6333337, 4.8, 4.8333335, 4.866667, 5.0333333, 5.066667, 5.1000004, 5.266667, 5.3, 5.3333335, 5.5),
+"transitions": PackedFloat32Array(0.5, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 1, 1, 0.5, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DraggableItem/Overlay:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"flash"]
+}
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 1.0547,
+"start_offset": 0.0,
+"stream": ExtResource("5_h6dvv")
+}, {
+"end_offset": 1.0547,
+"start_offset": 0.0,
+"stream": ExtResource("5_h6dvv")
+}, {
+"end_offset": 1.0547,
+"start_offset": 0.0,
+"stream": ExtResource("5_h6dvv")
+}, {
+"end_offset": 1.0547,
+"start_offset": 0.0,
+"stream": ExtResource("5_h6dvv")
+}, {
+"end_offset": 1.0547,
+"start_offset": 0.0,
+"stream": ExtResource("5_h6dvv")
+}, {
+"end_offset": 1.0547,
+"start_offset": 0.0,
+"stream": ExtResource("5_h6dvv")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_h6dvv")
+}],
+"times": PackedFloat32Array(0, 2.4333334, 2.9333334, 3.4333334, 3.7333336, 4, 4.3333335)
+}
+tracks/3/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_koent"]
 _data = {
@@ -215,6 +322,8 @@ libraries = {
 &"": SubResource("AnimationLibrary_koent")
 }
 autoplay = "burn"
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="." index="6"]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 

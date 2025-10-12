@@ -1,15 +1,39 @@
-[gd_scene load_steps=3 format=3 uid="uid://dsx4f412qaann"]
+[gd_scene load_steps=6 format=3 uid="uid://dsx4f412qaann"]
 
 [ext_resource type="PackedScene" uid="uid://b3q7waomg7hnc" path="res://Items/_item.tscn" id="1_olkdg"]
 [ext_resource type="Texture2D" uid="uid://ciy0ufya15jot" path="res://Items/Visuals/board_sword.png" id="2_4xb7i"]
+[ext_resource type="Script" uid="uid://qcnef1nfwn8e" path="res://Items/item_board_sword.gd" id="2_7oj1h"]
+[ext_resource type="Texture2D" uid="uid://qiui762avniy" path="res://Levels/Visuals/dogblock.png" id="4_1vfgt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4xb7i"]
+size = Vector2(42, 135)
 
 [node name="Item" instance=ExtResource("1_olkdg")]
 collision_layer = 4
 collision_mask = 4
+script = ExtResource("2_7oj1h")
 lifetime_in_seconds = -1.0
+weight = 3.0
+
+[node name="DraggableItem" parent="." index="0"]
+keep_offset = false
 
 [node name="TextureRect" parent="DraggableItem" index="1"]
 scale = Vector2(3, 3)
 texture = ExtResource("2_4xb7i")
+offset = Vector2(0, -24.885)
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(-1, -48)
+shape = SubResource("RectangleShape2D_4xb7i")
+
+[node name="GrabBox" parent="." index="2"]
+modulate = Color(1, 1, 1, 0.19215687)
+offset_left = -35.0
+offset_top = -118.0
+offset_right = 35.0
+offset_bottom = 19.0
+texture = ExtResource("4_1vfgt")
+expand_mode = 1
 
 [editable path="DraggableItem"]

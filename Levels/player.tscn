@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=4 uid="uid://dmxrsb6vf3fo0"]
+[gd_scene load_steps=79 format=4 uid="uid://dmxrsb6vf3fo0"]
 
 [ext_resource type="Script" uid="uid://y2icolv1tlef" path="res://Levels/Scripts/player.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bx7udjgnsoknr" path="res://Levels/Visuals/skybox.png" id="2"]
@@ -33,6 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://b21padqbquojs" path="res://UI/Visuals/speed_lines.png" id="28_qjdec"]
 [ext_resource type="Texture2D" uid="uid://c0pe8emsrbklv" path="res://Levels/Visuals/car_default.png" id="29_tcnov"]
 [ext_resource type="Texture2D" uid="uid://cjrsss045q2v1" path="res://UI/Visuals/pausebutton.png" id="32_7uaga"]
+[ext_resource type="PackedScene" uid="uid://b3jq7be2yduie" path="res://_Global/Particles/BurstIntoFlames.tscn" id="34_upfhq"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_34hgd"]
 size = Vector2(500, 30.805)
@@ -1117,6 +1118,11 @@ expand_mode = 2
 stretch_mode = 3
 script = SubResource("GDScript_7uaga")
 offset_on_cursor = Vector2(0, 0)
+
+[node name="Smokepuff" parent="." instance=ExtResource("34_upfhq")]
+position = Vector2(142, 90)
+scale_amount_min = 0.1
+color = Color(0.64918196, 0.36342838, 0.4689415, 1)
 
 [connection signal="drag_started" from="Visuals/WidgetWheel/DraggableItem/MouseDragComponent" to="." method="_steering_wheel_get_y"]
 [connection signal="input_event" from="Visuals/WidgetGear/Area2D" to="Visuals/WidgetGear/DraggableItem" method="_on_input_event"]

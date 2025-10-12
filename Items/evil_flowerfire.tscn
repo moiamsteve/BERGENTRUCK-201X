@@ -1,0 +1,274 @@
+[gd_scene load_steps=20 format=3 uid="uid://ba5njjtrobbbx"]
+
+[ext_resource type="Texture2D" uid="uid://b8suunvnocokw" path="res://Items/Visuals/board_flower.png" id="1_o1q3f"]
+[ext_resource type="Texture2D" uid="uid://e4ca8ed6m0r8" path="res://Items/Visuals/blank.png" id="2_xi8mv"]
+[ext_resource type="AudioStream" uid="uid://pmchs3rd2wti" path="res://_Global/SFX/snd_board_mantle_dash_fast.wav" id="3_5xocw"]
+[ext_resource type="Script" uid="uid://box5hci8a8qgc" path="res://Items/evil.gd" id="3_pxygo"]
+[ext_resource type="AudioStream" uid="uid://bjq6uqg350c0t" path="res://_Global/SFX/snd_board_bosshit.wav" id="4_sa72g"]
+
+[sub_resource type="GDScript" id="GDScript_o1q3f"]
+resource_name = "evilflowerfire"
+script/source = "extends Node2D
+
+func _ready() -> void:
+	var tween = create_tween()
+	tween.tween_property($AnimatedSprite2D,\"global_rotation\",0.0,0.15).set_ease(Tween.EASE_OUT_IN).set_trans(Tween.TRANS_CUBIC)
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1tlh0"]
+atlas = ExtResource("1_o1q3f")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6exnq"]
+atlas = ExtResource("1_o1q3f")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_be5ya"]
+atlas = ExtResource("1_o1q3f")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xncn2"]
+atlas = ExtResource("1_o1q3f")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lnd1u"]
+atlas = ExtResource("1_o1q3f")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eik5a"]
+atlas = ExtResource("1_o1q3f")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r5fvm"]
+atlas = ExtResource("1_o1q3f")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6dvv"]
+atlas = ExtResource("1_o1q3f")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xi8mv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1tlh0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6exnq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_be5ya")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xncn2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lnd1u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eik5a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r5fvm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_xi8mv")
+}],
+"loop": false,
+"name": &"burn",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h6dvv")
+}],
+"loop": true,
+"name": &"flash",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1tlh0")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}]
+
+[sub_resource type="Animation" id="Animation_xi8mv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("EvilItem:active")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_o1q3f"]
+resource_name = "ignite"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.033333335),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"burn", 1.0, false],
+"method": &"play"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 4
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.16666667, 0.4, 0.70000005),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.03490658503988659, 0.03490658503988659, -0.008726646259971648, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:scale")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.7),
+"transitions": PackedFloat32Array(1, 0.21022417, 1),
+"update": 0,
+"values": [Vector2(0.9, 0.9), Vector2(1.05, 1.05), Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("EvilItem:active")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.23333332),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/5/type = "audio"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AudioStreamPlayer")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("3_5xocw")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/5/use_blend = true
+tracks/6/type = "audio"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AudioStreamPlayer2")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_sa72g")
+}],
+"times": PackedFloat32Array(0.16666667)
+}
+tracks/6/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xi8mv"]
+_data = {
+&"RESET": SubResource("Animation_xi8mv"),
+&"ignite": SubResource("Animation_o1q3f")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pxygo"]
+radius = 40.0
+
+[node name="EvilFlowerfire" type="Node2D"]
+script = SubResource("GDScript_o1q3f")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_xi8mv")
+animation = &"burn"
+autoplay = "idle"
+frame = 7
+frame_progress = 1.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_xi8mv")
+}
+autoplay = "ignite"
+
+[node name="EvilItem" type="Node2D" parent="."]
+position = Vector2(0, -20)
+script = ExtResource("3_pxygo")
+range = 40.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -20)
+shape = SubResource("CircleShape2D_pxygo")
+debug_color = Color(0.9521989, 0, 0.5622998, 0.41960785)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+volume_db = -5.965
+pitch_scale = 0.95
