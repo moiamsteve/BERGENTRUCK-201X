@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsx4f412qaann"]
+
+[ext_resource type="PackedScene" uid="uid://b3q7waomg7hnc" path="res://Items/_item.tscn" id="1_olkdg"]
+[ext_resource type="Texture2D" uid="uid://ciy0ufya15jot" path="res://Items/Visuals/board_sword.png" id="2_4xb7i"]
+
+[node name="Item" instance=ExtResource("1_olkdg")]
+collision_layer = 4
+collision_mask = 4
+lifetime_in_seconds = -1.0
+
+[node name="TextureRect" parent="DraggableItem" index="1"]
+scale = Vector2(3, 3)
+texture = ExtResource("2_4xb7i")
+
+[editable path="DraggableItem"]

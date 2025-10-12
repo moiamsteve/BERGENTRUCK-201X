@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=3 uid="uid://bbcy10mthe6l1"]
+
+[ext_resource type="PackedScene" uid="uid://bos6rfssdin4y" path="res://Entities/_entity.tscn" id="1_n5o64"]
+[ext_resource type="Script" uid="uid://x4oraccw1vua" path="res://Levels/Scripts/ItemDropData.gd" id="2_iibyj"]
+[ext_resource type="PackedScene" uid="uid://bnb2xiobf6qwh" path="res://Items/item_leaf.tscn" id="3_s1t2r"]
+[ext_resource type="AudioStream" uid="uid://chyeoqgutemq5" path="res://_Global/SFX/Petals.wav" id="4_jokm8"]
+[ext_resource type="Texture2D" uid="uid://d1e5bhddtbfrg" path="res://Entities/Visuals/board_shrub.png" id="5_6qo6q"]
+
+[sub_resource type="Resource" id="Resource_wcjbc"]
+script = ExtResource("2_iibyj")
+item = ExtResource("3_s1t2r")
+drop_chance = 15
+metadata/_custom_type_script = "uid://x4oraccw1vua"
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_75vxw"]
+radius = 1.2
+height = 5.3929
+
+[sub_resource type="GDScript" id="GDScript_6qo6q"]
+resource_name = "shrubsprite"
+script/source = "extends Sprite3D
+
+func _ready() -> void:
+	frame = randi_range(0,5)
+"
+
+[node name="Bush" node_paths=PackedStringArray("collision_shape") instance=ExtResource("1_n5o64")]
+hp = 1
+items = Array[ExtResource("2_iibyj")]([SubResource("Resource_wcjbc"), SubResource("Resource_wcjbc"), SubResource("Resource_wcjbc"), SubResource("Resource_wcjbc"), SubResource("Resource_wcjbc"), SubResource("Resource_wcjbc"), SubResource("Resource_wcjbc"), SubResource("Resource_wcjbc"), SubResource("Resource_wcjbc"), SubResource("Resource_wcjbc"), SubResource("Resource_wcjbc")])
+solid = false
+stompable = true
+car_jump_mult = 0.2
+collision_shape = NodePath("EntityContainer/CollisionShape3D")
+pixel_size = 0.1
+hit_sound_effect = ExtResource("4_jokm8")
+random_scale = false
+
+[node name="CollisionShape3D" parent="EntityContainer" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.432386, 0)
+shape = SubResource("CapsuleShape3D_75vxw")
+
+[node name="Sprite3D" parent="EntityContainer" index="1"]
+offset = Vector2(0, 8)
+pixel_size = 0.4
+texture = ExtResource("5_6qo6q")
+hframes = 6
+script = SubResource("GDScript_6qo6q")

@@ -1,0 +1,94 @@
+[gd_scene load_steps=14 format=3 uid="uid://bgjkiougkwm1f"]
+
+[ext_resource type="PackedScene" uid="uid://bos6rfssdin4y" path="res://Entities/_entity.tscn" id="1_7vmhj"]
+[ext_resource type="Script" uid="uid://drtgywgenhb8p" path="res://Entities/Scripts/entity_tree.gd" id="2_fw40m"]
+[ext_resource type="AudioStream" uid="uid://8y5b87trowbj" path="res://_Global/SFX/Collision.wav" id="3_tj3l3"]
+[ext_resource type="Texture2D" uid="uid://co1h6hbks8mt8" path="res://Entities/Visuals/board_tree.png" id="4_fw40m"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qgdxx"]
+radius = 1.62747
+height = 30.8039
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2q0l6"]
+atlas = ExtResource("4_fw40m")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5rnas"]
+atlas = ExtResource("4_fw40m")
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jbha1"]
+atlas = ExtResource("4_fw40m")
+region = Rect2(40, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8lbq0"]
+atlas = ExtResource("4_fw40m")
+region = Rect2(60, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cnytx"]
+atlas = ExtResource("4_fw40m")
+region = Rect2(80, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nkmwr"]
+atlas = ExtResource("4_fw40m")
+region = Rect2(100, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbr22"]
+atlas = ExtResource("4_fw40m")
+region = Rect2(120, 0, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tj3l3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2q0l6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5rnas")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jbha1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8lbq0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cnytx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nkmwr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kbr22")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[node name="Tree" node_paths=PackedStringArray("collision_shape") instance=ExtResource("1_7vmhj")]
+script = ExtResource("2_fw40m")
+damage = 2.0
+collision_shape = NodePath("EntityContainer/CollisionShape3D")
+hit_sound_impact = ExtResource("3_tj3l3")
+particle_effect = -1
+beam_on_spawn = 4
+
+[node name="EntityContainer" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.8, 0)
+
+[node name="CollisionShape3D" parent="EntityContainer" index="0"]
+shape = SubResource("CapsuleShape3D_qgdxx")
+
+[node name="Sprite3D" parent="EntityContainer" index="1"]
+visible = false
+offset = Vector2(0, 120)
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="EntityContainer" index="2"]
+offset = Vector2(0, 9)
+pixel_size = 0.6
+billboard = 1
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_tj3l3")
+autoplay = "default"

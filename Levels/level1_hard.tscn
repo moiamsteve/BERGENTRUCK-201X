@@ -1,15 +1,20 @@
-[gd_scene load_steps=35 format=4 uid="uid://fshgeql7ofkj"]
+[gd_scene load_steps=41 format=4 uid="uid://fshgeql7ofkj"]
 
 [ext_resource type="PackedScene" uid="uid://bmfdo622wwei3" path="res://Levels/_level.tscn" id="1_lqeym"]
 [ext_resource type="AudioStream" uid="uid://cvcpmwcicdcp" path="res://_Global/Music/Sandrise.ogg" id="2_b5jn4"]
 [ext_resource type="PackedScene" uid="uid://ctqvlpvnb0dxs" path="res://Entities/bkg_board_tree.tscn" id="3_2m3sh"]
 [ext_resource type="Texture2D" uid="uid://ckd3hw1nfopw6" path="res://Levels/Visuals/ground_sand.png" id="3_3k8q0"]
+[ext_resource type="Texture2D" uid="uid://bly3dpgqkpqgs" path="res://Levels/Visuals/car_board.png" id="4_8e548"]
+[ext_resource type="Texture2D" uid="uid://de8qyw2w4grmi" path="res://Levels/Visuals/speedometer_board.png" id="5_f8dhg"]
 [ext_resource type="Shader" uid="uid://bt2opdfmb6b3a" path="res://Levels/Visuals/3d_mosaic_test.gdshader" id="6_f8dhg"]
+[ext_resource type="FontFile" uid="uid://vdneiropev6s" path="res://_Global/Fonts/TENNA GLYPHS (1).ttf" id="6_rd5ux"]
+[ext_resource type="Texture2D" uid="uid://b74p7gfo3sigo" path="res://Levels/Visuals/steering wheel board.png" id="7_ylm6e"]
 [ext_resource type="Shader" uid="uid://do6ig3soufyor" path="res://Levels/Visuals/2d_mosaic.gdshader" id="8_ylm6e"]
 [ext_resource type="Texture2D" uid="uid://k8p486amcdi3" path="res://Levels/Visuals/backgrounds/Cloud1.png" id="9_8e548"]
 [ext_resource type="PackedScene" uid="uid://c3a4oi8k5x1mp" path="res://_Global/Particles/3DSmokeReal.tscn" id="10_8e548"]
 [ext_resource type="Texture2D" uid="uid://dqpr14hn23n1i" path="res://Levels/Visuals/backgrounds/Cloud2.png" id="10_luvwr"]
 [ext_resource type="Texture2D" uid="uid://u01xdshxcsxb" path="res://_Global/Particles/Visuals/realsmoke.png" id="11_f8dhg"]
+[ext_resource type="PackedScene" uid="uid://dsx4f412qaann" path="res://Items/item_board_sword.tscn" id="15_lemp5"]
 
 [sub_resource type="Environment" id="Environment_f8dhg"]
 background_mode = 1
@@ -21,6 +26,8 @@ fog_density = 0.584
 fog_sky_affect = 0.734
 fog_depth_curve = 0.45471525
 fog_depth_begin = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ylm6e"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rd5ux"]
 transparency = 1
@@ -191,7 +198,7 @@ func _process(delta: float) -> void:
 
 [node name="Level1Hard" instance=ExtResource("1_lqeym")]
 music = ExtResource("2_b5jn4")
-item_queue_intro = Array[String](["uid://mo26i7dv8ue2", "uid://mo26i7dv8ue2", "uid://bgp4wbehltd08", "uid://bgp4wbehltd08", "", "", "", "", "", ""])
+item_queue_intro = Array[String](["uid://mo26i7dv8ue2", "uid://mo26i7dv8ue2", "uid://bgp4wbehltd08", "uid://bgp4wbehltd08", "uid://bbcy10mthe6l1", "uid://bbcy10mthe6l1", "uid://bbcy10mthe6l1", "uid://bbcy10mthe6l1", "", "uid://bgjkiougkwm1f", "uid://bgjkiougkwm1f"])
 item_queue_mid = Array[String](["uid://bympmn5b7p10t", "uid://btetd788ltvnu", "uid://btetd788ltvnu", "uid://cuu8u82sv6b75", "uid://cuu8u82sv6b75", "uid://dod06qvkdjumy", "", "", "", "", "", ""])
 item_queue_end = Array[String](["uid://bympmn5b7p10t", "uid://bympmn5b7p10t", "uid://btetd788ltvnu", "uid://cuu8u82sv6b75", "uid://dod06qvkdjumy", "uid://ceudumccrqglg", "uid://cuu8u82sv6b75", "", "", ""])
 trees = ExtResource("3_2m3sh")
@@ -204,6 +211,25 @@ environment = SubResource("Environment_f8dhg")
 
 [node name="Background" parent="Player" index="0"]
 mesh = null
+
+[node name="Visuals" parent="Player" index="2"]
+material = SubResource("ShaderMaterial_ylm6e")
+texture = ExtResource("4_8e548")
+
+[node name="SpeedBar" parent="Player/Visuals" index="0"]
+texture = ExtResource("5_f8dhg")
+
+[node name="RichTextLabel" parent="Player/Visuals/SpeedBar" index="0"]
+visible = true
+offset_left = -28.0
+offset_top = -6.0
+offset_right = 48.089996
+offset_bottom = 34.0
+theme_override_fonts/normal_font = ExtResource("6_rd5ux")
+theme_override_font_sizes/normal_font_size = 16
+
+[node name="SteeringWheel" parent="Player/Visuals/WidgetWheel" index="4"]
+texture = ExtResource("7_ylm6e")
 
 [node name="Parallax2D" parent="Player/Visuals" index="10"]
 visible = false
@@ -227,7 +253,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_lemp5")
 mesh = SubResource("ArrayMesh_f8dhg")
 surface_material_override/0 = SubResource("StandardMaterial3D_ylm6e")
 
-[node name="ColorRect3" type="TextureRect" parent="Player" index="25"]
+[node name="ColorRect4" type="TextureRect" parent="Player" index="25"]
 light_mask = 512
 visibility_layer = 512
 z_index = 4096
@@ -258,7 +284,12 @@ transform = Transform3D(1, 0, 0, 0, 1.5541531, -0.032998215, 0, 0.051312223, 0.9
 mesh = SubResource("PlaneMesh_2m3sh")
 script = SubResource("GDScript_8e548")
 
-[node name="BackgroundNear2" type="MeshInstance3D" parent="." index="10"]
+[node name="Item" parent="." index="10" node_paths=PackedStringArray("player") instance=ExtResource("15_lemp5")]
+position = Vector2(185, 38)
+collision_layer = 5
+player = NodePath("../Player")
+
+[node name="BackgroundNear2" type="MeshInstance3D" parent="." index="11"]
 transform = Transform3D(1, 0, 0, 0, 1.5541531, -0.032998215, 0, 0.051312223, 0.9994554, 0, -33.182796, -91.314255)
 mesh = SubResource("PlaneMesh_8e548")
 script = SubResource("GDScript_f8dhg")
